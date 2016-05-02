@@ -1,33 +1,33 @@
-# Run Mongo
+## Run Mongo
 ```
 > mongo
 ```
 
-# Import Collection
+## Import Collection
 ```
 > mongoimport --db test --collection restaurants --drop --file primer-dataset.json
 ```
-# Show All Databases
+## Show All Databases
 ```
 > show databases
 ```
 
-# Get Current Database
+## Get Current Database
 ```
 > db
 ```
 
-# Use Another Database
+## Use Another Database
 ```
 > use test
 ```
 
-# Show Database Collections
+## Show Database Collections
 ```
 > show collections
 ```
 
-# Datatypes
+## Datatypes
 ```
 {'x': null} # null
 {'x': true} # Boolean
@@ -41,19 +41,19 @@
 {'x': ObjectId()} # Id
 ```
 
-# Counting Collection Records
+## Counting Collection Records
 ```
 > db.restaurants.count()
 25359
 ```
 
-# Insert Record
+## Insert Record
 ```
 > db.posts.insert({'title': 'hello world', 'author': 5, 'created_at': new Date()})
 WriteResult({ "nInserted" : 1 })
 ```
 
-# Batch Insert
+## Batch Insert
 ```
 > db.posts.insert([{'title': 'hello world1', 'author': 6, 'created_at': new Date()}, {'title': 'hello world2', 'author': 7, 'created_at': new Date()}])
 BulkWriteResult({
@@ -68,7 +68,7 @@ BulkWriteResult({
 })
 ```
 
-# Find All
+## Find All
 ```
 > db.posts.find()
 { "_id" : ObjectId("571bde257c1d1340ef01c29f"), "title" : "hello world", "author" : 5, "created_at" : ISODate("2016-04-23T20:42:13.971Z") }
@@ -76,7 +76,7 @@ BulkWriteResult({
 { "_id" : ObjectId("571bdf367c1d1340ef01c2a1"), "title" : "hello world2", "author" : 7, "created_at" : ISODate("2016-04-23T20:46:46.132Z") }
 ```
 
-# Remove With Query
+## Remove With Query
 ```
 > db.posts.find()
 { "_id" : ObjectId("571bde257c1d1340ef01c29f"), "title" : "hello world", "author" : 5, "created_at" : ISODate("2016-04-23T20:42:13.971Z") }
@@ -89,7 +89,7 @@ WriteResult({ "nRemoved" : 1 })
 { "_id" : ObjectId("571bdf367c1d1340ef01c2a1"), "title" : "hello world2", "author" : 7, "created_at" : ISODate("2016-04-23T20:46:46.132Z") }
 ```
 
-# Find One
+## Find One
 ```
 > db.posts.findOne({'title':'hello world'})
 null
@@ -102,7 +102,7 @@ null
 }
 ```
 
-# Find All
+## Find All
 ```
 > db.posts.find()
 { "_id" : ObjectId("571bdf367c1d1340ef01c2a0"), "title" : "hello world1", "author" : 6, "created_at" : ISODate("2016-04-23T20:46:46.132Z") }
@@ -111,7 +111,7 @@ null
 { "_id" : ObjectId("571bdf367c1d1340ef01c2a0"), "title" : "hello world1", "author" : 6, "created_at" : ISODate("2016-04-23T20:46:46.132Z") }
 ```
 
-# Replace Document
+## Replace Document
 ```
 > post = db.posts.findOne()
 {
@@ -140,9 +140,9 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-# Using Modifiers
+## Using Modifiers
 
-## `$inc` Modifier
+### `$inc` Modifier
 
 ```
 > post = db.posts.findOne()
@@ -205,7 +205,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$set` Modifier
+### `$set` Modifier
 ```
 > db.posts.update({'title': 'new hello world'}, {'$set':{'comments': []}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
@@ -220,7 +220,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$unset` Modifier
+### `$unset` Modifier
 ```
 > db.posts.update({'title': 'new hello world'}, {'$unset':{'comments': 1}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
@@ -234,7 +234,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$push` Modifier
+### `$push` Modifier
 ```
 > db.posts.update({'title': 'new hello world'}, {'$set':{'comments': []}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
@@ -266,7 +266,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$push` and `$each` Modifier
+### `$push` and `$each` Modifier
 ```
 > db.posts.update({'title': 'new hello world'}, {'$push':{'comments': {'$each':[{'author': 'hello1@clivern.com', 'comment': 'bla bla bla1', 'created_at': new Date()}, {'author': 'hello2@clivern.com', 'comment': 'bla bla bla2', 'created_at': new Date()}, {'author': 'hello@clivern.com3', 'comment': 'bla bla bla3', 'created_at': new Date()}]}}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
@@ -302,7 +302,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$push`, `$each` and `$slice` Modifier
+### `$push`, `$each` and `$slice` Modifier
 ```
 > db.posts.update({'title': 'new hello world'}, {'$push':{'comments': {'$each':[{'author': 'hello1@clivern.com', 'comment': 'bla bla bla1', 'created_at': new Date()}, {'author': 'hello2@clivern.com', 'comment': 'bla bla bla2', 'created_at': new Date()}, {'author': 'hello@clivern.com3', 'comment': 'bla bla bla3', 'created_at': new Date()}]}}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
@@ -370,7 +370,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$push`, `$each`, `$slice` and `$sort` Modifier
+### `$push`, `$each`, `$slice` and `$sort` Modifier
 ```
 > db.posts.update({'title': 'new hello world'}, {'$push':{'comments': {'$each':[{'author': 'hello1@clivern.com', 'comment': 'bla bla bla1', 'created_at': new Date()}, {'author': 'hello2@clivern.com', 'comment': 'bla bla bla2', 'created_at': new Date()}, {'author': 'hello@clivern.com3', 'comment': 'bla bla bla3', 'created_at': new Date()}], '$slice': -4}}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
@@ -438,7 +438,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$addToSet` Modifier
+### `$addToSet` Modifier
 ```
 > db.posts.findOne()
 {
@@ -578,7 +578,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## `$pull` Modifier
+### `$pull` Modifier
 ```
 > db.posts.findOne()
 {
@@ -651,7 +651,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## Positional Edits
+### Positional Edits
 ```
 > db.posts.findOne()
 {
@@ -724,7 +724,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## Update With Upsert is `True`
+### Update With Upsert is `True`
 ```
 > db.posts.update({'title': 'new world with upsert'}, {'$set':{'comments':[]}}, true)
 WriteResult({
@@ -755,16 +755,16 @@ WriteResult({
 }
 ```
 
-# Remove All Documents in Collection
+## Remove All Documents in Collection
 ```
 > db.posts.remove({})
 WriteResult({ "nRemoved" : 5 })
 ```
 
 
-# Querying
+## Querying
 
-## Bulk Insert
+### Bulk Insert
 ```
 > db.users.insert([{'_id': 1, 'first_name': 'Mark', 'last_name': 'Doe', 'username': 'admin', 'email': 'admin@clivern.com', 'job_title': 'CEO', 'created_at': new Date(), 'updated_at': new Date()}, {'_id': 2, 'first_name': 'Selena', 'last_name': 'Gomez', 'username': 'selena', 'email': 'selena@clivern.com', 'job_title': 'Backend Developer', 'created_at': new Date(), 'updated_at': new Date()}, {'_id': 3, 'first_name': 'Helen', 'last_name': 'Otal', 'username': 'helen', 'email': 'helen@clivern.com', 'job_title': 'Web Designer', 'created_at': new Date(), 'updated_at': new Date()}, {'_id': 4, 'first_name': 'Joe', 'last_name': 'Mar', 'username': 'joe', 'email': 'joe@clivern.com', 'job_title': 'Support Agent', 'created_at': new Date(), 'updated_at': new Date()}])
 BulkWriteResult({
@@ -779,7 +779,7 @@ BulkWriteResult({
 })
 ```
 
-## Find All
+### Find All
 ```
 > db.users.find({}).pretty()
 {
@@ -824,7 +824,7 @@ BulkWriteResult({
 }
 ```
 
-## Exclude Keys
+### Exclude Keys
 ```
 > db.users.find({}, {'created_at': 0, 'updated_at': 0}).pretty()
 {
@@ -861,7 +861,7 @@ BulkWriteResult({
 }
 ```
 
-## Query Conditionals
+### Query Conditionals
 ```
 > db.users.find({'username': 'admin'}, {'created_at': 0, 'updated_at': 0}).pretty()
 {
@@ -1588,7 +1588,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 }
 ```
 
-## Indexing
+### Indexing
 
 ```
 > db.restaurants.find({'address.street': '3 Avenue'}).explain('executionStats')
@@ -1666,9 +1666,9 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 25359
 ```
 
-# Aggregation Framework
+## Aggregation Framework
 
-## `$project` Modifier
+### `$project` Modifier
 ```
 > db.users.find({}).pretty()
 {
@@ -1763,7 +1763,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "field_name" : "joe" }
 ```
 
-## `$match` Modifier
+### `$match` Modifier
 ```
 > db.users.aggregate({'$project': {'id': '$username', '_id': 0}}, {'$match': {'id': 'admin'}})
 { "id" : "admin" }
@@ -1791,7 +1791,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "id" : 4 }
 ```
 
-## `$add`, `$subtract`, `$multiply`, `$divide` and `$mod` Modifier
+### `$add`, `$subtract`, `$multiply`, `$divide` and `$mod` Modifier
 ```
 > db.results.find({}).pretty()
 {
@@ -1873,7 +1873,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : 5, "total" : 99 }
 ```
 
-## `$substr`, `$concat`, `$toLower` and `$toUpper` Modifier
+### `$substr`, `$concat`, `$toLower` and `$toUpper` Modifier
 ```
 > db.tuts.find({}).pretty()
 {
@@ -1916,7 +1916,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("571e06a776dcd773abde06c9"), "title" : "WORDPRESS ARTICLE" }
 ```
 
-## `$year`, `$month`, `$week`, `$hour`, `$minute`, `$second`, `$dayOfMonth`, `$dayOfWeek` and `$dayOfYear` Modifier
+### `$year`, `$month`, `$week`, `$hour`, `$minute`, `$second`, `$dayOfMonth`, `$dayOfWeek` and `$dayOfYear` Modifier
 ```
 > db.tuts.aggregate({'$project': {'created_in_year': {'$year': '$created_at'}}})
 { "_id" : ObjectId("571e06a776dcd773abde06c7"), "created_in_year" : 2016 }
@@ -1964,7 +1964,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("571e06a776dcd773abde06c9"), "created_in_day_of_year" : 116 }
 ```
 
-## `$cmp`, `$strcasecmp`, `$eq`, `$ne`, `$gt`, `$gte`, `$lt`, `$lte`, `$and`, `$or`, `$not`, `$cond` and `$ifNull` Modifier
+### `$cmp`, `$strcasecmp`, `$eq`, `$ne`, `$gt`, `$gte`, `$lt`, `$lte`, `$and`, `$or`, `$not`, `$cond` and `$ifNull` Modifier
 ```
 > db.tuts.aggregate({'$project': {'title': {'$cmp': ['Hello World', '$title']}}})
 { "_id" : ObjectId("571e06a776dcd773abde06c7"), "title" : 0 }
@@ -2037,7 +2037,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("571e06a776dcd773abde06c9"), "title" : "WordPress Article" }
 ```
 
-## `$group` Modifier
+### `$group` Modifier
 ```
 > db.tuts.find({}).pretty()
 {
@@ -2276,7 +2276,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("571e06a776dcd773abde06c9"), "comments" : { "content" : "bla bla2" } }
 ```
 
-## MapReduce
+### MapReduce
 ```
 db.orders.insert([{'cust_id': 'A123', 'amount': 500, 'status': 'A'},{'cust_id': 'A124', 'amount': 600, 'status': 'B'},{'cust_id': 'A125', 'amount': 700, 'status': 'C'}])
 db.orders.mapReduce(function(){ emit(this.cust_id, this.amount); }, function(key, values){ return Array.sum(values); },{ 'query': {'status':'A'}, 'out': 'order_totals' })
