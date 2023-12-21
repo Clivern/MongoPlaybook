@@ -1,0 +1,19 @@
+repo_name: Clivern/MongoPlaybook
+report_id: decb7c5715587bae68fadcff4b01a010
+version: 0.1
+repo_type: Public
+timestamp: '2023-12-21T15:23:36+00:00'
+requested_by: Clivern
+provider: github
+branch: master
+detected_tools_count: 1
+tools:
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
